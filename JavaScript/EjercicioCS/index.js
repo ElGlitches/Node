@@ -1,19 +1,27 @@
 const axios = require("axios");
-
-const main = async() => {
-    let response = await axios.get('https://rickandmortyapi.com/api/character');
-    let{
-        data: { results },
-    } = response;
-    let personajes = results.map((personajes) => {
-        return {
-            id : personajes.id,
-            name: personajes.name,
-            species: personajes.species
-
-        }
+const fs = require("fs").promises;
+const path = require("path");
+const main = async () => {
+  let response = await axios.get("https://rickandmortyapi.com/api/character");
+  let {
+    data: { results },
+  } = response;
+  let personajes = results
+    .map((personajes) => {
+      return {
+        id: personajes.id,
+        name: personajes.name,
+        status: personajes.status,
+        species: personajes.species,
+      };
     })
-    console.log(personajes);
+    .map((personaje) => Object.values(personaje).join(","))
+    .join("\n");
+
+await fs.writeFile(path.join(__dirname,'data.csv'), personajes)
+//console.log(path.join(__dirname, "data.csv"));
+
+// console.log(personajes);
 };
 
 main();

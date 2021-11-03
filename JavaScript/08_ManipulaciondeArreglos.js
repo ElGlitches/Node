@@ -93,7 +93,7 @@ var resultado = estudiantes
     console.log(estudiantes);
     console.log(resultado);
 
-    //some (alguos pueden cumplir la condicion)
+    //some (algunos pueden cumplir la condicion)
     var numeros =[1,2,3,4,5,6,7,8,9,10];
     var resultado = numeros.some((numero) => numero % 2 === 0);
     console.log(resultado);
